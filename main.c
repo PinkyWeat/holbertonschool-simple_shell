@@ -22,15 +22,16 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
         	/* dup cmd line + save only what was first written */
 		buffer2 = strdup(buffer);
 		token = strtok(buffer2, "\n");
-		/* creates child proc for execve */
+		/* creates child proc for execve */		
+		location = executeMe(token);
 		pid = fork();
 		if (pid == -1)
 			return (-1);
 		if (pid == 0)
 		{
-			location = executeMe(token);
+			printMe(location);
 			/* free(buffer), free(buffer2), free(location); */
-			if (execve(location[0], location, NULL) == -1)
+			if (execve(location[0], location, environ) == -1)
 				perror("Error: "); /* logrado aca ejecuta y se termina */
 		}
 		wait(&status);

@@ -1,6 +1,9 @@
 #include "main.h"
 /**
- *
+ * repeatMe - counts num of repeated times a char is in a string.
+ * @str: string we will loop through.
+ * @delim: the char we want to count.
+ * Return: num of repeated times delim is in string.
  */
 int repeatMe(char *str, char delim)
 {
@@ -16,6 +19,8 @@ int repeatMe(char *str, char delim)
 }
 /**
  * executeMe - takes a string and turns it to a **char to be executed.
+ * @buffer: string to be tokenized.
+ * Return: string of strings.
  */
 char **executeMe(char *buffer)
 {
@@ -42,7 +47,8 @@ char **executeMe(char *buffer)
 	return (str);
 }
 /**
- *
+ * printMe - Prints a **string.
+ * @print: what to print.
  */
 void printMe(char **print)
 {
@@ -50,11 +56,13 @@ void printMe(char **print)
 
         for (x = 0; print[x]; x++)
         {
-                printf("print[%i]: %s\n", x, print[x]);
+                printf("print[%i]: %s.\n", x, print[x]);
         }
 }
 /**
  * _which - returns file path.
+ * @filename: file to look for.
+ * Return: path.
  */
 char *_which(char *filename, ...)
 {
@@ -75,12 +83,13 @@ char *_which(char *filename, ...)
 		token = strtok(NULL, ":");
 	}
 	saveMe[i] = NULL; /* first pos + concat */
-	for (i = 0; i < 7; i++)
+	for (i = 0; saveMe[i]; i++)
 	{
 		aux = _str_concat(saveMe[i], "/");
 		aux2 = _str_concat(aux, filename);
 		if (stat(aux2, &st) == 0)
 			break; /* sale del if cuando existe */
+		/*if (counter == i && )*/
 		free(aux);
 		free(aux2);
 	}
@@ -92,6 +101,8 @@ char *_which(char *filename, ...)
 }
 /**
  * _getenv - gets env.
+ * @name: name of envp.
+ * Return: content of envp.
  */
 char *_getenv(const char *name)
 {
