@@ -7,11 +7,14 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
         size_t bufsize = 0;
         char *buffer = NULL, *buffer2 = NULL, **location = NULL;
 	char *token = NULL, *hint = "no";
-        int character = 0;
+        int character = 0, interactMe = 1;
 	int pid = 0, status;
 
-	while (1)
+	while (interactMe)
 	{
+		interactMe = isatty(0);	/* check for interactive mode */
+		if (interactMe)
+			write(1, "$ ", 2);
 		/* printf("#cisfun$ "); */
         	character = getline(&buffer, &bufsize, stdin);
 		if (character == -1)
