@@ -12,12 +12,12 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 
 	while (1)
 	{
-		printf("#cisfun$ ");
+		/*printf("#cisfun$ ");*/
         	character = getline(&buffer, &bufsize, stdin);
 		if (character == -1)
 		{
 			putchar(10);
-			exit(98);
+			exit(EXIT_SUCCESS);
 		}
         	/* dup cmd line + save only what was first written */
 		buffer2 = strdup(buffer);
