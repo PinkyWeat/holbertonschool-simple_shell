@@ -43,10 +43,8 @@ char **executeMe(char *buffer)
 		tok = strdup(str[0]);
 		free(str[0]);
 		str[0] = _which(tok);
-		printf("aca: %s\n", str[0]);
 		if (str[0] == NULL)
 		{
-			printf("a ver: %s\n", str[0]);
 			free(str[0]);
 			str[0] = "no";
 			return (str);

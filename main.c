@@ -24,20 +24,13 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 		token = strtok(buffer2, "\n");
 		/* creates child proc for execve */		
 		location = executeMe(token);
-		printf("x\n");
-		printMe(location);
 		if (strcmp(location[0], hint) == 0) /* hardcode */
-		{
-			printf("didn't exist");
 			continue;
-		}
-		printf("did I leave?\n");
 		pid = fork();
 		if (pid == -1)
 			return (-1);
 		if (pid == 0)
 		{
-			printMe(location);
 			/* free(buffer), free(buffer2), free(location); */
 			if (execve(location[0], location, environ) == -1)
 				perror("Error: "); /* logrado aca ejecuta y se termina */
