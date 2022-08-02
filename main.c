@@ -6,13 +6,13 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 {
         size_t bufsize = 0;
         char *buffer = NULL, *buffer2 = NULL, **location = NULL;
-	char *token = NULL;
+	char *token = NULL, *hint = "no";
         int character = 0;
 	int pid = 0, status;
 
 	while (1)
 	{
-		/*printf("#cisfun$ ");*/
+		printf("#cisfun$ ");
         	character = getline(&buffer, &bufsize, stdin);
 		if (character == -1)
 		{
@@ -24,6 +24,14 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 		token = strtok(buffer2, "\n");
 		/* creates child proc for execve */		
 		location = executeMe(token);
+		printf("x\n");
+		printMe(location);
+		if (strcmp(location[0], hint) == 0) /* hardcode */
+		{
+			printf("didn't exist");
+			continue;
+		}
+		printf("did I leave?\n");
 		pid = fork();
 		if (pid == -1)
 			return (-1);

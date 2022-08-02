@@ -43,6 +43,14 @@ char **executeMe(char *buffer)
 		tok = strdup(str[0]);
 		free(str[0]);
 		str[0] = _which(tok);
+		printf("aca: %s\n", str[0]);
+		if (str[0] == NULL)
+		{
+			printf("a ver: %s\n", str[0]);
+			free(str[0]);
+			str[0] = "no";
+			return (str);
+		}
 	}
 	return (str);
 }
@@ -66,7 +74,7 @@ void printMe(char **print)
  */
 char *_which(char *filename, ...)
 {
-	int i, args = 0;
+	int i, args = 0, counter = 0;
 	struct stat st;
 	char *token = NULL, *duplicate = NULL, *aux = NULL, *aux2 = NULL;
 	char **saveMe; /*= malloc(sizeof(char *) * 7);i*/
@@ -89,7 +97,8 @@ char *_which(char *filename, ...)
 		aux2 = _str_concat(aux, filename);
 		if (stat(aux2, &st) == 0)
 			break; /* sale del if cuando existe */
-		/*if (counter == i && )*/
+		else
+			counter++; /* counts num of times file didn't exists */
 		free(aux);
 		free(aux2);
 	}
@@ -97,6 +106,13 @@ char *_which(char *filename, ...)
 	for (i = 0; saveMe[i]; i++)
 		free(saveMe[i]);
 	/* free(saveMe[i]), free(saveMe), free(duplicate); */
+	counter += 1; /* hardcode maybe */
+	if (counter == args)
+	{
+		/*aux2 = "no";
+		printf("a verrr: %s\n", aux2);*/
+		return (NULL);
+	}
 	return (aux2);
 }
 /**
