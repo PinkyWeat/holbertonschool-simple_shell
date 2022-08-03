@@ -8,7 +8,7 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
         char *buffer = NULL, *buffer2 = NULL, **location = NULL;
 	char *token = NULL, *hint = "no";
         int interactMe = 1;
-	int pid = 0, status;
+	int pid = 0, status, x;
 
 	while (interactMe)
 	{
