@@ -25,7 +25,7 @@ int repeatMe(char *str, char delim)
 char **executeMe(char *buffer)
 {
 	char **str = NULL;
-	char *ptr = strdup(buffer);
+	char *ptr = NULL;
 	int x = 0, cargs = 0;
 	char *token = NULL, *tok = NULL;
 
@@ -47,8 +47,11 @@ char **executeMe(char *buffer)
 		{
 			free(str[0]);
 			str[0] = "no";
+			free(ptr);
 			return (str);
 		}
+		free(ptr);
+		free(tok);
 	}
 	return (str);
 }
@@ -118,23 +121,19 @@ char *_which(char *filename, ...)
  */
 char *_getenv(const char *name)
 {
-        int i = 0;
-        char *duplicate, *token;
+        int i;
+        char *duplicate = NULL, *token = NULL;
 
         /* loop through envps */
-        for (; environ[i]; i++)
+        for (i = 0; environ[i]; i++)
         {
                 duplicate = strdup(environ[i]);
-
                 token = strtok(duplicate, "=");
                 /* check for PATH */
                 if (strcmp(duplicate, name) == 0)
-                {
-                        token = strtok(NULL, "=");
-                        return(token);
-                }
-                else
-                        continue;
+			break;
+		free(duplicate);
         }
-        return (0);
+	token = strtok(NULL, "=");
+        return (token);
 }

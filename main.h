@@ -26,4 +26,7 @@ char **executeMe(char *buffer);
 
 void printMe(char **print);
 
+char *_strdup(char *str);
+
+
 #endif
