@@ -75,7 +75,7 @@ char *_which(char *filename, ...)
 	int i, args = 0, counter = 0;
 	struct stat st;
 	char *token = NULL, *duplicate = NULL, *aux = NULL, *aux2 = NULL;
-	char **saveMe; /*= malloc(sizeof(char *) * 7);i*/
+	char **saveMe;
 
 	duplicate = _getenv("PATH"); /* obtain current path */
 	args = repeatMe(duplicate, ':') + 2; /* num of sub paths + null */
@@ -85,7 +85,7 @@ char *_which(char *filename, ...)
 	token = strtok(duplicate, ":"); /* tokenize */
 	for (i = 0; token; i++)
 	{
-		saveMe[i] = strdup(token);
+		saveMe[i] = _strdup(token);
 		token = strtok(NULL, ":");
 	}
 	saveMe[i] = NULL; /* first pos + concat */
@@ -103,12 +103,10 @@ char *_which(char *filename, ...)
 	/* only need to free now */
 	for (i = 0; saveMe[i]; i++)
 		free(saveMe[i]);
-	/* free(saveMe[i]), free(saveMe), free(duplicate); */
 	counter += 1; /* hardcode maybe */
 	if (counter == args)
 	{
-		/*aux2 = "no";
-		printf("a verrr: %s\n", aux2);*/
+		/*aux2 = "no";*/
 		return (NULL);
 	}
 	return (aux2);
@@ -124,25 +122,19 @@ char *_getenv(const char *name)
         char *duplicate, *token;
 
         /* loop through envps */
-        for (; environ; i++)
+        for (; environ[i]; i++)
         {
-               /* printf("envp looks: %s\n", environ[i]); */
-
                 duplicate = strdup(environ[i]);
-                /* printf("duplicate of envp: %s\n", duplicate); */
 
                 token = strtok(duplicate, "=");
-                /*printf("token before if: %s\n", token); */
                 /* check for PATH */
                 if (strcmp(duplicate, name) == 0)
                 {
                         token = strtok(NULL, "=");
-                        /*printf("token after strcmp + strtok: %s\n", token); */
                         return(token);
                 }
                 else
                         continue;
         }
-        printf("for is done\n");
         return (0);
 }
