@@ -18,14 +18,14 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 
         	if (getline(&buffer, &bufsize, stdin) == -1)
 		{
-			break;
+			putchar(10);
+			exit(EXIT_SUCCESS);
 		}
         	/*dup cmd line + save only what was first written*/
 		buffer2 = strdup(buffer);
-		token = strtok(buffer, " \n");
+		token = strtok(buffer, "\n");
 		/*creates child proc for execve*/		
 		location = executeMe(token);
-		
 		if (strcmp(location[0], "exit") == 0)
 		{
 			free(buffer2);

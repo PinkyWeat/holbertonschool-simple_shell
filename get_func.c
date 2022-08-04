@@ -25,10 +25,11 @@ int repeatMe(char *str, char delim)
 char **executeMe(char *buffer)
 {
 	char **str = NULL;
-	char *ptr = NULL;
+	char *ptr;
 	int x = 0, cargs = 0;
 	char *token = NULL, *tok = NULL;
 
+	ptr = strdup(buffer);
 	cargs = repeatMe(buffer, ' ') + 2; /* counts spaces + NULL */
 	str = malloc(cargs * sizeof(char *)); /* allocate memory accordingly */
 	token = strtok(ptr, " ");
@@ -43,31 +44,20 @@ char **executeMe(char *buffer)
 		tok = strdup(str[0]);
 		free(str[0]);
 		str[0] = _which(tok);
+		free(tok);
 		if (str[0] == NULL)
 		{
 			free(str[0]);
 			str[0] = "no";
 			free(ptr);
+			free(tok);
 			return (str);
 		}
-		free(ptr);
-		free(tok);
 	}
+	free(ptr);
 	return (str);
 }
-/**
- * printMe - Prints a **string.
- * @print: what to print.
- */
-void printMe(char **print)
-{
-        int x = 0;
 
-        for (x = 0; print[x]; x++)
-        {
-                printf("print[%i]: %s.\n", x, print[x]);
-        }
-}
 /**
  * _which - returns file path.
  * @filename: file to look for.
@@ -103,15 +93,17 @@ char *_which(char *filename, ...)
 		free(aux);
 		free(aux2);
 	}
+	free(aux);
 	/* only need to free now */
-	for (i = 0; saveMe[i]; i++)
-		free(saveMe[i]);
 	counter += 1; /* hardcode maybe */
 	if (counter == args)
 	{
 		/*aux2 = "no";*/
 		return (NULL);
 	}
+	for (i = 0; saveMe[i]; i++)
+		free(saveMe[i]);
+	free(saveMe);
 	return (aux2);
 }
 /**
@@ -130,10 +122,13 @@ char *_getenv(const char *name)
                 duplicate = strdup(environ[i]);
                 token = strtok(duplicate, "=");
                 /* check for PATH */
-                if (strcmp(duplicate, name) == 0)
-			break;
-		free(duplicate);
-        }
-	token = strtok(NULL, "=");
-        return (token);
+                if (strcmp(token, name) == 0)
+		{
+			token = strtok(NULL, "=");
+			return(token);
+		}
+		else
+			free(duplicate);
+	}
+        return (0);
 }
