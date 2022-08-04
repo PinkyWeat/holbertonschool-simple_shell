@@ -24,7 +24,7 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
                 }
                 /* dup cmd line + save only what was first written */
                 buffer2 = strdup(buffer);
-                token = strtok(buffer2, "\n");
+                token = strtok(buffer2, " \n");
                 /* creates child proc for execve */
                 location = executeMe(token);
                 if (strcmp(location[0], hint) == 0) /* hardcode */
