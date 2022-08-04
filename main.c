@@ -5,27 +5,23 @@
 int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 {
 	size_t bufsize = 0, h = 0, r;
-	char *buffer = NULL, *buffer2 = NULL, **location = NULL;
+	char *buffer = NULL, **location = NULL;
 	char *token = NULL, *hint = "no";
-	int character = 0, interactMe = 1, pid = 0, status;
+	int interactMe = 1, status;
 
-	while (interactMe)
+	while (1)
 	{
 		interactMe = isatty(0); /* check for interactive mode */
 		if (interactMe)
 			write(1, "$ ", 2);
-		character = getline(&buffer, &bufsize, stdin);
-		if (character == -1)
-		{
-			putchar(10);
+		if (getline(&buffer, &bufsize, stdin) == -1)
 			break;
-		}
 		/* dup cmd line + save only what was first written */
-		buffer2 = strdup(buffer);
-		token = strtok(buffer2, "\n");
+		/**buffer2 = strdup(buffer);*/
+		token = strtok(buffer, "\n");
 		if (strcmp(token, "exit") == 0)
 		{
-			free(buffer2);
+			/**free(buffer2);*/
 			free(buffer);
 			return(h);
 		}
@@ -35,7 +31,6 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 			{
 				printf("%s\n", environ[r]);
 			}
-			free(buffer2);
 			continue;
 		}
 		/* creates child proc for execve */
@@ -46,12 +41,10 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 			free(buffer);
 			return (0);
 		}
-		if (strcmp(location[0], hint) == 0) /* hardcode */
+		if (strcmp(location[0], hint) == 0)  /**hardcode*/
 			continue;
-		pid = fork();
-		if (pid == 0)
+		if (fork() == 0)
 		{
-			/* free(buffer), free(buffer2), free(location); */
 			if (execve(location[0], location, environ) == -1)
 			{
 				perror(" "); /* logrado aca ejecuta y se termina */
@@ -60,7 +53,7 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 		}
 		else
 			wait(&status);
-		free_array(location), free(buffer2), free(token);
+		free_array(location); /**free(buffer2);*/
 	}
 	free(buffer);
 	return (0);
