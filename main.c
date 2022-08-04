@@ -4,10 +4,10 @@
  */
 int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 {
-	size_t bufsize = 0, h = 0, r;
+	size_t bufsize = 0, r;
 	char *buffer = NULL, **location = NULL;
 	char *token = NULL, *hint = "no";
-	int interactMe = 1, status;
+	int interactMe = 1, status, exit_end = 0;
 
 	while (1)
 	{
@@ -22,8 +22,8 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 		if (strcmp(token, "exit") == 0)
 		{
 			/**free(buffer2);*/
-			free(buffer);
-			return(h);
+			/**free(buffer);*/
+			break;
 		}
 		if (strcmp(token, "env") == 0)
 		{
@@ -52,9 +52,12 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 			}
 		}
 		else
+		{
 			wait(&status);
+			exit_end = WEXITSTATUS(status);
+		}
 		free_array(location); /**free(buffer2);*/
 	}
 	free(buffer);
-	return (0);
+	return (exit_end);
 }
