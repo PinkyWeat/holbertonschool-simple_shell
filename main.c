@@ -28,15 +28,17 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
                 token = strtok(buffer2, "\n");
 		if (strcmp(token, "exit") == 0)
 		{
+			free(buffer2);
 			free(buffer);
 			return(h);
 		}
 		if (strcmp(token, "env") == 0)
 		{
-			for (r = 0; environ[r]; r++)
+			for (r = 0; environ[r] != NULL; r++)
 			{
 				printf("%s\n", environ[r]);
 			}
+			free(token);
 			continue;
 		}
                 /* creates child proc for execve */
@@ -61,7 +63,7 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
                 }
                 else
 			wait(&status);
-                free_array(location), free(buffer2);
+                free_array(location), free(buffer2), free(token);;
         }
 	free(buffer);
         return (0);
