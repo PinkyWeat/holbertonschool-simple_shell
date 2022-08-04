@@ -47,9 +47,13 @@ char **executeMe(char *buffer)
                 {
                         free(str[0]);
                         str[0] = "no";
+			free(ptr);
+			free(tok);
                         return (str);
                 }
         }
+	free(tok);
+	free(ptr);
         return (str);
 }
 /**
@@ -89,12 +93,16 @@ char *_which(char *filename, ...)
                 token = strtok(NULL, ":");
         }
         saveMe[i] = NULL; /* first pos + concat */
+	free(duplicate);
         for (i = 0; saveMe[i]; i++)
         {
                 aux = _str_concat(saveMe[i], "/");
                 aux2 = _str_concat(aux, filename);
                 if (stat(aux2, &st) == 0)
-                        break; /* sale del if cuando existe */
+		{
+			free(aux);
+			break; /* sale del if cuando existe */
+		}
                 else
                         counter++; /* counts num of times file didn't exists */
                 free(aux);
@@ -103,14 +111,14 @@ char *_which(char *filename, ...)
         /* only need to free now */
         for (i = 0; saveMe[i]; i++)
                 free(saveMe[i]);
-        /* free(saveMe[i]), free(saveMe), free(duplicate); */
+        free(saveMe);
         counter += 1; /* hardcode maybe */
-        if (counter == args)
+        /**if (counter == args)
         {
-                /*aux2 = "no";
-                printf("a verrr: %s\n", aux2);*/
+                aux2 = "no";
+                printf("a verrr: %s\n", aux2);
                 return (NULL);
-        }
+        }*/
         return (aux2);
 }
 /**
@@ -121,10 +129,10 @@ char *_which(char *filename, ...)
 char *_getenv(const char *name)
 {
         int i = 0;
-        char *duplicate, *token;
+        char *duplicate, *token, *aux;
 
         /* loop through envps */
-        for (; environ; i++)
+        for (; environ[i]; i++)
         {
                /* printf("envp looks: %s\n", environ[i]); */
 
@@ -137,11 +145,12 @@ char *_getenv(const char *name)
                 if (strcmp(duplicate, name) == 0)
                 {
                         token = strtok(NULL, "=");
+			aux = strdup(token);
+			free(duplicate);
                         /*printf("token after strcmp + strtok: %s\n", token); */
-                        return(token);
+                        return(aux);
                 }
-                else
-                        continue;
+                free(duplicate);
         }
         printf("for is done\n");
         return (0);

@@ -20,7 +20,7 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
                 if (character == -1)
                 {
                         putchar(10);
-                        exit(EXIT_SUCCESS);
+                        break;
                 }
                 /* dup cmd line + save only what was first written */
                 buffer2 = strdup(buffer);
@@ -39,7 +39,8 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
                                 perror("Error: "); /* logrado aca ejecuta y se termina */
                 }
                 wait(&status);
-                /* free(buffer), free(buffer2); */
+                free_array(location), free(buffer2);
         }
+	free(buffer);
         return (0);
 }

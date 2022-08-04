@@ -44,6 +44,12 @@ char *_str_concat(char *s1, char *s2)
 	return (conc);
 }
 
+/**
+* _strdup - return a pointer to a newly allocated space in memory.
+* @str: array to copy
+* Return: pointer
+*/
+
 char *_strdup(char *str)
 {
 	char *pointer;
