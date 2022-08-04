@@ -36,9 +36,13 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
                 {
                         /* free(buffer), free(buffer2), free(location); */
                         if (execve(location[0], location, environ) == -1)
-                                perror("Error: "); /* logrado aca ejecuta y se termina */
+                        {
+				perror(" "); /* logrado aca ejecuta y se termina */
+				return (0);
+			}
                 }
-                wait(&status);
+                else
+			wait(&status);
                 free_array(location), free(buffer2);
         }
 	free(buffer);
