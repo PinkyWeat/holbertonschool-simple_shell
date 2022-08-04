@@ -44,12 +44,10 @@ char **executeMe(char *buffer)
 		tok = strdup(str[0]);
 		free(str[0]);
 		str[0] = _which(tok);
-		free(tok);
 		if (str[0] == NULL)
 		{
 			free(str[0]);
 			str[0] = "no";
-			free(ptr);
 			free(tok);
 			return (str);
 		}
@@ -74,7 +72,7 @@ char *_which(char *filename, ...)
 	args = repeatMe(duplicate, ':') + 2; /* num of sub paths + null */
 	saveMe = malloc(args * sizeof(char *)); /* reserve space */
 	if (saveMe == NULL)
-		return ("error");
+		return (0);
 	token = strtok(duplicate, ":"); /* tokenize */
 	for (i = 0; token; i++)
 	{
@@ -87,13 +85,14 @@ char *_which(char *filename, ...)
 		aux = _str_concat(saveMe[i], "/");
 		aux2 = _str_concat(aux, filename);
 		if (stat(aux2, &st) == 0)
-			break; /* sale del if cuando existe */
+		{
+			break;
+		}	/* sale del if cuando existe */
 		else
 			counter++; /* counts num of times file didn't exists */
 		free(aux);
 		free(aux2);
 	}
-	free(aux);
 	/* only need to free now */
 	counter += 1; /* hardcode maybe */
 	if (counter == args)
@@ -101,9 +100,9 @@ char *_which(char *filename, ...)
 		/*aux2 = "no";*/
 		return (NULL);
 	}
-	for (i = 0; saveMe[i]; i++)
+	/**for (i = 0; saveMe[i]; i++)
 		free(saveMe[i]);
-	free(saveMe);
+	free(saveMe);*/
 	return (aux2);
 }
 /**
@@ -127,8 +126,6 @@ char *_getenv(const char *name)
 			token = strtok(NULL, "=");
 			return(token);
 		}
-		else
-			free(duplicate);
 	}
         return (0);
 }
