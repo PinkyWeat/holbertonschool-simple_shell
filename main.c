@@ -18,15 +18,13 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
 			write(1, "$ ", 2);
 		if (getline(&buffer, &bufsize, stdin) == -1)
 			break;
-		if (cleanBuf(buffer) == 0)
+		if (cleanBuf(buffer) == 0) /* cleans spaces cases */
+		{
+			/*free(buffer);*/
 			continue; /* needs according errors */
+		}
 		token = strtok(buffer, "\n");
 		location = executeMe(token); /* finds complete root for execve */
-		if (!location[0])
-		{
-			free(location[0]), free(buffer);
-			return (0);
-		}
 		if (strcmp(location[0], hint) == 0)  /** path not found for cmd **/
 			continue;
 		if (fork() == 0)
@@ -42,7 +40,7 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
 			wait(&status);
 			exit_end = WEXITSTATUS(status);
 		}
-		freeMe(location); /**free(buffer2);*/
+		freeMe(location);
 	}
 	free(buffer);
 	return (exit_end);
