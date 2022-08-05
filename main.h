@@ -10,9 +10,7 @@
 
 extern char **environ;
 
-/*int main(int argc, char **argv);*/
-
-int main(__attribute__((unused))int argc, char **argv);
+int main(int argc, char **argv);
 
 char *_getenv(const char *name);
 
@@ -28,7 +26,8 @@ void printMe(char **print);
 
 char *_strdup(char *str);
 
-void free_array(char **array);
+void freeMe(char **me);
 
+int cleanBuf(char *buffer);
 
 #endif

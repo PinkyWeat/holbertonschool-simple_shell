@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 /**
- * str_concat - function that concatenates two strings..
- * @s1: ctrl + c.
- * @s2: ctrl + v.
+ * _str_concat - function that concatenates two strings.
+ * @s1: string destination.
+ * @s2: string to add.
  * Return: final pointer.
  */
 char *_str_concat(char *s1, char *s2)
@@ -43,26 +43,49 @@ char *_str_concat(char *s1, char *s2)
 	conc[p2] = '\0';
 	return (conc);
 }
-
-char *_strdup(char *str)
+/**
+ * freeMe - frees a **char.
+ * @me: the string to free.
+ */
+void freeMe(char **me)
 {
-	char *pointer;
-	int size, x;
+	int i = 0;
 
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	size = strlen(str);
-	pointer = (char *)malloc((size + 1) * sizeof(char));
+	for (; me[i]; i++)
+		free(me[i]);
+	free(me[i]), free(me);
+}
+/**
+ * cleanBuf - filters border cases.
+ * @buffer: what user entered in cmd line.
+ * Return: 0 or 1.
+ */
+int cleanBuf(char *buffer)
+{
+	char *replicate = NULL, *token = NULL;
+	int i;
 
-	if (pointer == NULL)
+	replicate = strdup(buffer); /* replicate to not break it */
+	token = strtok(replicate, "\n"); /* tokenize string */
+	if (strcmp(token, "env") == 0) /* if buffer's env */
 	{
-		return (NULL);
+		printMe(environ);
+		free(replicate);
+		return (0);
 	}
-	for (x = 0; x < size; x++)
+	if (strcmp(token, "exit") == 0) /* if buffer's exit */
 	{
-		pointer[x] = str[x];
+		free(replicate);
+		return (0);
 	}
-	return (pointer);
+	for (i = 0; replicate[i]; i++)
+	{
+		if (buffer[i] != ' ' && buffer[i] != '\n' && buffer[i] != '\t')
+		{ /* checks spaces and more */
+			free(replicate);
+			return (1);
+		}
+	}
+	free(replicate);
+	return (0);
 }
