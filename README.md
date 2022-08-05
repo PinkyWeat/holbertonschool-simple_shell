@@ -97,11 +97,7 @@ User types ``exit`` in command line (after ``ls``):
 
 ### Flowcharts
 
-![]()
-
-![]()
-
-![]()
+![](https://i.imgur.com/Dm4b5UE.jpg) 
 
 ---
 ### Authors
