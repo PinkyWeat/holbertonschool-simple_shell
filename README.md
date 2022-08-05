@@ -30,6 +30,12 @@ Tested memory with:
 
 ### Example
 
+#### Interactive Mode
+
+User types ls -la /var/ in command line:
+
+![](https://imgur.com/a/tQ1Cbkm)
+
 ---
 ### File Description
 
