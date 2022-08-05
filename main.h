@@ -24,8 +24,6 @@ char **executeMe(char *buffer);
 
 void printMe(char **print);
 
-char *_strdup(char *str);
-
 void freeMe(char **me);
 
 int cleanBuf(char *buffer);

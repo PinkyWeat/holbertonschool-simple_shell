@@ -65,10 +65,6 @@ User types ``ls`` ``-la`` ``/var/`` in command line:
 
 ![](https://i.imgur.com/s47moBI.png)
 
-User types ``env`` in command line:
-
-![](https://i.imgur.com/rrqHpvV.png)
-
 User types ``exit`` in command line (after ``ls``):
 
 ![](https://i.imgur.com/BnvNQGm.png)
@@ -81,15 +77,25 @@ User types ``exit`` in command line (after ``ls``):
 - **main.h** - file contains the main header with all the prototypes  of the functions and libraries used.
 
 - **get_func.c** - file contains the following functions:
+
 > ``repeatMe`` -  function counts number of repeated times a char appears in a string.
+
 > ``executeMe`` - function takes a string and tokenizes it into a ``**char``
+
 > ``printMe`` - function prints a ``**char``, was used for an easier debugging.
+
 > ``_which`` - function returns the path of a given file.
+
 > ``_getenv`` - function gets the value of the enviromental variable given.
 
 - **funcs_aux.c** - file contains more auxiliary functions:
+
 > ``_str_concat`` - function concatenates two strings.
+
 > ``freeMe`` - function frees memory for a ``**char``
+
+> ``cleanBuf`` - function cleans border cases.
+
 
 - **hsh** - shell interpreter executable file.
 
