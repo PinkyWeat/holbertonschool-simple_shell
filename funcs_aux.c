@@ -66,3 +66,16 @@ char *_strdup(char *str)
 	}
 	return (pointer);
 }
+/**
+ *
+ */
+void freeMe(char **me)
+{
+        int i = 0;
+
+        for (; me[i]; i++)
+                free(me[i]);
+
+        free(me[i]);
+        free(me);
+}
