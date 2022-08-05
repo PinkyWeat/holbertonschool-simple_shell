@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 /**
- * str_concat - function that concatenates two strings..
- * @s1: ctrl + c.
- * @s2: ctrl + v.
+ * _str_concat - function that concatenates two strings.
+ * @s1: string destination.
+ * @s2: string to add.
  * Return: final pointer.
  */
 char *_str_concat(char *s1, char *s2)
@@ -43,39 +43,15 @@ char *_str_concat(char *s1, char *s2)
 	conc[p2] = '\0';
 	return (conc);
 }
-
-char *_strdup(char *str)
-{
-	char *pointer;
-	int size, x;
-
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	size = strlen(str);
-	pointer = (char *)malloc((size + 1) * sizeof(char));
-
-	if (pointer == NULL)
-	{
-		return (NULL);
-	}
-	for (x = 0; x < size; x++)
-	{
-		pointer[x] = str[x];
-	}
-	return (pointer);
-}
 /**
- *
+ * freeMe - frees a **char.
+ * @me: the string to free.
  */
 void freeMe(char **me)
 {
-        int i = 0;
+	int i = 0;
 
-        for (; me[i]; i++)
-                free(me[i]);
-
-        free(me[i]);
-        free(me);
+	for (; me[i]; i++)
+		free(me[i]);
+	free(me[i]), free(me);
 }

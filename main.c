@@ -1,53 +1,44 @@
 #include "main.h"
 /**
- *
+ * main - entry point.
+ * @argc: num of args.
+ * @argv: pointer to pointer to a string.
+ * Return: 0 upon success.
  */
-int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
+int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
 {
-	size_t bufsize = 0, r;
+	size_t bufsize = 0;
 	char *buffer = NULL, **location = NULL;
 	char *token = NULL, *hint = "no";
-	int interactMe = 1, status, exit_end = 0;
+	int status = 0, exit_end = 0;
 
 	while (1)
 	{
-		interactMe = isatty(0); /* check for interactive mode */
-		if (interactMe)
+		if (isatty(0) == 1)
 			write(1, "$ ", 2);
 		if (getline(&buffer, &bufsize, stdin) == -1)
 			break;
-		/* dup cmd line + save only what was first written */
-		/**buffer2 = strdup(buffer);*/
-		token = strtok(buffer, "\n");
+		token = strtok(buffer, "\n"); /* save only before \n */
 		if (strcmp(token, "exit") == 0)
-		{
-			/**free(buffer2);*/
-			/**free(buffer);*/
 			break;
-		}
-		if (strcmp(token, "env") == 0)
+		if (strcmp(token, "env") == 0) /* prints envps */
 		{
-			for (r = 0; environ[r] != NULL; r++)
-			{
-				printf("%s\n", environ[r]);
-			}
+			printMe(environ);
 			continue;
 		}
-		/* creates child proc for execve */
-		location = executeMe(token);
+		location = executeMe(token); /* finds complete root for execve */
 		if (!location[0])
 		{
-			free(location[0]);
-			free(buffer);
+			free(location[0]), free(buffer);
 			return (0);
 		}
-		if (strcmp(location[0], hint) == 0)  /**hardcode*/
+		if (strcmp(location[0], hint) == 0)  /** path not found for cmd **/
 			continue;
 		if (fork() == 0)
 		{
 			if (execve(location[0], location, environ) == -1)
 			{
-				perror(" "); /* logrado aca ejecuta y se termina */
+				perror(" ");
 				return (0);
 			}
 		}
@@ -56,7 +47,7 @@ int main(__attribute__((unused))int argc ,__attribute__((unused))char **argv)
 			wait(&status);
 			exit_end = WEXITSTATUS(status);
 		}
-		free_array(location); /**free(buffer2);*/
+		freeMe(location); /**free(buffer2);*/
 	}
 	free(buffer);
 	return (exit_end);
