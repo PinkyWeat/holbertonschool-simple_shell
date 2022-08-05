@@ -42,7 +42,7 @@ User types ``env`` in command line:
 
 User types ``exit`` in command line (after ``ls``):
 
-![](https://i.imgur.com/rrqHpvV.png)
+![](https://i.imgur.com/BnvNQGm.png)
 
 ---
 ### File Description
