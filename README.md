@@ -16,6 +16,22 @@ The shell is both an interactive and scripting languge.
 - All prototypes of all functions are included in header file ``main.h``.
 ---
 
+### Allowed functions and System calls used
+
+- ``execve`` (man 2 execve)
+- ``exit`` (man 3 exit)
+- ``fork`` (man 2 fork)
+- ``free`` (man 3 free)
+- ``getline`` (man 3 getline)
+- ``isatty`` (man 3 isatty)
+- ``malloc`` (man 3 isatty)
+- ``perror`` (man 3 perror)
+- ``stat`` (\_lxstat) (man 2 fstat)
+- ``strtok`` (man 3 strtok)
+- ``wait`` (man 2 wait)
+
+---
+
 ### Compilation & Testing
 
 We compile with:
@@ -28,6 +44,19 @@ Tested memory with:
 
 ---
 
+### Shell handles:
+
+- Interactive mode
+- Non interctive mode
+- Handles built-in commands
+- Handles env (built-in)
+- Handles exit (built-in)
+- Executes commands with arguments
+- Handles commands flags
+- Handles errors
+- Handles ctrl+d (end program)
+
+---
 ### Example
 
 #### Interactive Mode
