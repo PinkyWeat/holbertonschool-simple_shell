@@ -65,10 +65,6 @@ User types ``ls`` ``-la`` ``/var/`` in command line:
 
 ![](https://i.imgur.com/s47moBI.png)
 
-User types ``env`` in command line:
-
-![](https://i.imgur.com/rrqHpvV.png)
-
 User types ``exit`` in command line (after ``ls``):
 
 ![](https://i.imgur.com/BnvNQGm.png)
