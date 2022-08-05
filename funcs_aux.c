@@ -56,34 +56,36 @@ void freeMe(char **me)
 	free(me[i]), free(me);
 }
 /**
- *
+ * cleanBuf - filters border cases.
+ * @buffer: what user entered in cmd line.
+ * Return: 0 or 1.
  */
 int cleanBuf(char *buffer)
 {
-        char *replicate = NULL, *token = NULL;
-        int i;
+	char *replicate = NULL, *token = NULL;
+	int i;
 
-        replicate = strdup(buffer); /* replicate to not break it */
-        token = strtok(replicate, "\n"); /* tokenize string */
-        if (strcmp(token, "env") == 0) /* if buffer's env */
-        {
-                printMe(environ);
-                free(replicate);
-                return (0);
-        }
-        if (strcmp(token, "exit") == 0) /* if buffer's exit */
-        {
-                free(replicate);
-                return (0);
-        }
-        for (i = 0; replicate[i]; i++)
-        {
-                if (buffer[i] != ' ' && buffer[i] != '\n' && buffer[i] != '\t') /* checks spaces and more */
-		{
+	replicate = strdup(buffer); /* replicate to not break it */
+	token = strtok(replicate, "\n"); /* tokenize string */
+	if (strcmp(token, "env") == 0) /* if buffer's env */
+	{
+		printMe(environ);
+		free(replicate);
+		return (0);
+	}
+	if (strcmp(token, "exit") == 0) /* if buffer's exit */
+	{
+		free(replicate);
+		return (0);
+	}
+	for (i = 0; replicate[i]; i++)
+	{
+		if (buffer[i] != ' ' && buffer[i] != '\n' && buffer[i] != '\t')
+		{ /* checks spaces and more */
 			free(replicate);
 			return (1);
 		}
-        }
-        free(replicate);
-        return (0);
+	}
+	free(replicate);
+	return (0);
 }
