@@ -19,10 +19,7 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
 		if (getline(&buffer, &bufsize, stdin) == -1)
 			break;
 		if (cleanBuf(buffer) == 0) /* cleans spaces cases */
-		{
-			/*free(buffer);*/
 			continue; /* needs according errors */
-		}
 		token = strtok(buffer, "\n");
 		location = executeMe(token); /* finds complete root for execve */
 		if (strcmp(location[0], hint) == 0)  /** path not found for cmd **/

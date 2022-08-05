@@ -71,7 +71,7 @@ void printMe(char **print)
 char *_which(char *filename, ...)
 {
 	char *token = NULL, *duplicate = NULL, *aux = NULL, *aux2 = NULL;
-	char **saveMe; /*= malloc(sizeof(char *) * 7);*/
+	char **saveMe;
 	int i, args = 0, counter = 0;
 	struct stat st;
 
