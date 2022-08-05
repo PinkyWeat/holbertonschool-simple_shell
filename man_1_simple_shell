@@ -1,0 +1,42 @@
+.TH SIMPLE_SHELL
+.SH NAME
+Simple_Shell, command lenguage interpreter
+.SH SYNOPSIS
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <string.h>
+
+#include <unistd.h>
+
+#include <sys/types.h>
+
+#include <sys/wait.h>
+
+#include <sys/stat.h>
+
+int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
+.SH DESCRIPTION
+Is a clone of a Unix Shell, a command_interpreter of shell that provides a command line user interface for Unix-like operating systems.
+.PP
+Simple_Shell can execute:
+.PP
+env - prints a list of the current enviroment variables.
+
+exit - exit the Simple_Shell
+
+commands with and without flags - Example: "echo" "ls" "pwd"
+
+commands with path - Example: "/bin/ls"
+
+.SH RETUN VALUE
+Return 0 on success, otherwise another number.
+
+.SH COPYRIGHT
+.PP
+Copyright 2022 @Denisse Landau @Damian Caetano
+
+.SH CREDITS
+.PP
+This man page was created as part of a Holberton School project.
