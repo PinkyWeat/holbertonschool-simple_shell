@@ -20,7 +20,7 @@ The shell is both an interactive and scripting languge.
 
 We compile with:
 
-	gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+	gcc -g -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 Tested memory with:
 
@@ -30,35 +30,28 @@ Tested memory with:
 
 ### Example
 
-Print a string:
-
-       int x = 0;
-
-       char *string = "Otaku";
-
-       x = _printf("I'am am an%s, string);
-
-       printf("%s, x);
-
-       return (0);
-
-Print an integer:
-
-        int x = 0;
-
-        int prints = 420;
-
-        x = _printf("It's:%i", prints);
-
-        printf("%i", x);
-
-        return(0);
 ---
 ### File Description
 
-****
+**main.c** - contains main() function which is first called by the operating system when the user runs the program.
+
+**main.h** - file contains the main header with all the prototypes  of the functions and libraries used.
+
+**get_func.c** - file contains the following functions:
+> ``repeatMe`` -  function counts number of repeated times a char appears in a string.
+> ``executeMe`` - function takes a string and tokenizes it into a ``**char``
+> ``printMe`` - function prints a ``**char``, was used for an easier debugging.
+> ``_which`` - function returns the path of a given file.
+> ``_getenv`` - function gets the value of the enviromental variable given.
+
+**funcs_aux.c** - file contains more auxiliary functions:
+> ``_str_concat`` - function concatenates two strings.
+> ``freeMe`` - function frees memory for a ``**char``
+
+**hsh** - shell interpreter executable file.
 
 ---
+
 ### Flowcharts
 
 ![]()
