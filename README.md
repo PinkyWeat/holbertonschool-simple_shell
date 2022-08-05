@@ -79,15 +79,21 @@ User types ``exit`` in command line (after ``ls``):
 - **get_func.c** - file contains the following functions:
 
 > ``repeatMe`` -  function counts number of repeated times a char appears in a string.
+
 > ``executeMe`` - function takes a string and tokenizes it into a ``**char``
+
 > ``printMe`` - function prints a ``**char``, was used for an easier debugging.
+
 > ``_which`` - function returns the path of a given file.
+
 > ``_getenv`` - function gets the value of the enviromental variable given.
 
 - **funcs_aux.c** - file contains more auxiliary functions:
 
 > ``_str_concat`` - function concatenates two strings.
+
 > ``freeMe`` - function frees memory for a ``**char``
+
 > ``cleanBuf`` - function cleans border cases.
 
 
