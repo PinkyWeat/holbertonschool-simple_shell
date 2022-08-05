@@ -18,14 +18,9 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char **argv)
 			write(1, "$ ", 2);
 		if (getline(&buffer, &bufsize, stdin) == -1)
 			break;
-		token = strtok(buffer, "\n"); /* save only before \n */
-		if (strcmp(token, "exit") == 0)
-			break;
-		if (strcmp(token, "env") == 0) /* prints envps */
-		{
-			printMe(environ);
-			continue;
-		}
+		if (cleanBuf(buffer) == 0)
+			continue; /* needs according errors */
+		token = strtok(buffer, "\n");
 		location = executeMe(token); /* finds complete root for execve */
 		if (!location[0])
 		{

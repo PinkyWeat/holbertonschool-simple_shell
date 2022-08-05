@@ -28,4 +28,6 @@ char *_strdup(char *str);
 
 void freeMe(char **me);
 
+int cleanBuf(char *buffer);
+
 #endif
