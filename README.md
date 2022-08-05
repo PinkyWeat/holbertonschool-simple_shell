@@ -32,9 +32,9 @@ Tested memory with:
 
 #### Interactive Mode
 
-User types ls -la /var/ in command line:
+- User types ls -la /var/ in command line:
 
-![](https://imgur.com/a/tQ1Cbkm)
+![](https://i.imgur.com/s47moBI.png)
 
 ---
 ### File Description
